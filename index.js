@@ -219,7 +219,7 @@ async function install() {
       start();
     } catch (code) {
       var installLogContents = cat(${installLogFile});
-      logError(`log contents: ${installLogContents}`);
+      spinner.start(`log contents: ${installLogContents}`);
       spinner.fail();
       logError(`installation failed...check ${installLogFile} for more details`);
       shell.exit(1);
