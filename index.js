@@ -188,18 +188,20 @@ async function install() {
 
       spinner.start('build front-end application');
       await asyncExec('npm run build');
+      shell.mv('client/dist', 'server');
       spinner.succeed();
 
       spinner.start('install back-end dependencies');
       shell.cd(`${installPath}/server`);
-      await asyncExec('npm install --only=production');
+      await asyncExec('npm install');
+      await asyncExec('npm install https://github.com/stufisher/node-sonos#v1.15.0-test');
       // await asyncExec('npm install forever -g');
       spinner.succeed();
 
       spinner.start('cleaning up installation files');
       shell.cd(installPath);
       // Move the dist folder created by `npm run build` in to the server folder
-      shell.mv('client/dist', 'server');
+      
 
       // clean up unnecessary files
       shell.mv('server/.env.production', 'server/.env');
