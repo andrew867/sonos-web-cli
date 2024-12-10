@@ -218,6 +218,8 @@ async function install() {
       // Start the Sonos Web server
       start();
     } catch (code) {
+      var installLogContents = cat(${installLogFile});
+      logError(`log contents: ${installLogContents}`);
       spinner.fail();
       logError(`installation failed...check ${installLogFile} for more details`);
       shell.exit(1);
